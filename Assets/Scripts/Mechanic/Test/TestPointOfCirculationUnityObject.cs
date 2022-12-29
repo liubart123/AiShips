@@ -51,30 +51,37 @@ namespace Assets.Scripts.Mechanic.Test
             float angleA13 = v13.ToDegreeAngle();
             //Debug.Log($"v23:{v23}, angle023:{angle023}, angleA13:{angleA13}");
 
-            mask11.transform.rotation = Quaternion.Euler(0, 0, angleA13 + 90);
-            mask21.transform.rotation = Quaternion.Euler(0, 0, angleA13 - 90);
+            mask11.transform.rotation = Quaternion.Euler(0, 0, angleA13);
+            mask21.transform.rotation = Quaternion.Euler(0, 0, angleA13 + 180);
 
             bool clockwiseDirection = Vector2.SignedAngle(v13, v12) < 0;
-            Debug.Log($"Vector2.SignedAngle(v13, v12):{Vector2.SignedAngle(v13, v12)}");
             float finalCirculationAngle = pointOfCirculation.endCirculationAngle;
-            float angleOfDrawing = finalCirculationAngle - angle023;
-            if (clockwiseDirection)
-                angleOfDrawing = angleOfDrawing - 360;
-            angleOfDrawing = angleOfDrawing % 360;
-            //Debug.Log($"angleOfDrawing:{angleOfDrawing}, finalCirculationAngle:{finalCirculationAngle}, angle023:{angle023},clockwiseDirection:{clockwiseDirection}");
-            if (Mathf.Abs(angleOfDrawing) <= 180)
+
+
+            float angleOfDrawing = angleA13 - finalCirculationAngle;
+
+            if (!clockwiseDirection)
             {
-                mask12.transform.rotation = Quaternion.Euler(0, 0, angleA13 - 90 + angleOfDrawing);
-                mask22.transform.rotation = Quaternion.Euler(0, 0, angleA13 + 90);
+                angleOfDrawing = 180 - angleOfDrawing;
             }
-            else
+            while (angleOfDrawing < 0)
             {
-                mask12.transform.rotation = Quaternion.Euler(0, 0, angleA13 + 90);
-                mask22.transform.rotation = Quaternion.Euler(0, 0, angleA13 - 90 + angleOfDrawing);
+                angleOfDrawing = 360 + angleOfDrawing;
             }
 
-            //Debug.Log($"angle023:{angle023}");
-            //Debug.Log($"angle023:{angle023}, angle1:{angle1}, point3:{point3}, v13:{v13}, v12:{v12}, v23:{v23}");
+            angleOfDrawing = angleOfDrawing % 360;
+            Debug.Log($"clockwiseDirection:{clockwiseDirection}");
+            Debug.Log($"angleOfDrawing:{angleOfDrawing}");
+            if (angleOfDrawing < 180)
+            {
+                mask12.transform.rotation = Quaternion.Euler(0, 0, finalCirculationAngle + 90 * (clockwiseDirection ? 1 : -1));
+                mask22.transform.rotation = Quaternion.Euler(0, 0, angleA13);
+            } else
+            {
+                mask12.transform.rotation = Quaternion.Euler(0, 0, angleA13);
+                mask22.transform.rotation = Quaternion.Euler(0, 0, finalCirculationAngle + 90 * (clockwiseDirection ? 1 : -1));
+            }
+
             ship.warShip.warShipBehavior.pointOfCirculation = pointOfCirculation;
         }
     }
