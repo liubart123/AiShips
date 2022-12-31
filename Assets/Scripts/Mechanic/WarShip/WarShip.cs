@@ -14,20 +14,25 @@ namespace Assets.Scripts.Mechanic.WarShip
         #region CONTROLLERS
         public WarShipShootingController warShipShootingController;
         public WarShipMovementController warShipMovementController;
-        public WarShipBehavior warShipBehavior;
+        public WarShipMovementBehavior warShipMovementBehavior;
+        public WarShipWeaponBehavior warShipWeaponBehavior;
         #endregion
 
         public void InitializeWarShipComponents()
         {
-            List<WarShipComponent> components = new List<WarShipComponent>();
-            components.Add(warShipShootingController);
-            components.Add(warShipMovementController);
-            foreach(var component in components)
+            List<WarShipComponent> components = new List<WarShipComponent>
             {
+                warShipShootingController,
+                warShipMovementController,
+                warShipMovementBehavior,
+                warShipWeaponBehavior
+            };
+            foreach (var component in components)
+            {
+                if (component == null)
+                    continue;
                 component.WarShip = this;
             }
-
-            warShipBehavior = new WarShipBehavior(this);
         }
     }
 }

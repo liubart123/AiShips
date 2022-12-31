@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class WarShipUnityObject : MonoBehaviour
 {
+    [HideInInspector]
     public WarShip warShip;
     // Start is called before the first frame update
     void Start()
@@ -13,17 +15,23 @@ public class WarShipUnityObject : MonoBehaviour
         {
             warShip.InitializeWarShipComponents();
         }
-        SetRotationAngle();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
-    [ContextMenu("Set rotation angle")]
-    public void SetRotationAngle()
+    private void Update()
     {
-        warShip.warShipMovementController.rotationAngle = transform.rotation.eulerAngles.z;
+        Render();
     }
+
+    public void Render()
+    {
+        if (warShip != null && warShip.warShipMovementController != null)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, warShip.warShipMovementController.currentRotationAngle - 90);
+            transform.position = new Vector3(
+                warShip.warShipMovementController.currentPosition.x,
+                warShip.warShipMovementController.currentPosition.y,
+                0);
+        }
+    }
+
 }
