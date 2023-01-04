@@ -47,7 +47,7 @@ namespace Assets.Scripts.Mechanic.Test
                 Instance.ticksAreRunning = false;
                 return;
             }
-            Instance.InitializeEngine();
+            //Instance.InitializeEngine();
             Instance.gameEngine.DoTick();
         }
 
@@ -69,7 +69,7 @@ namespace Assets.Scripts.Mechanic.Test
         {
             while (Instance.ticksAreRunning && ticksInRow < 1000)
             {
-                Instance.InitializeEngine();
+                //Instance.InitializeEngine();
                 Instance.gameEngine.DoTick();
                 Instance.warShipUnityObjects.ForEach(el => el.Render());
                 ticksInRow++;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Mechanic.WarShip
 {
+    [Serializable]
     public abstract class WarShipComponent
     {
         [NonSerialized]

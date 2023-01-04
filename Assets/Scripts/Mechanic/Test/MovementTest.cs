@@ -12,7 +12,7 @@ namespace Assets.Scripts.Mechanic.Test
         public VectorOfMovement vectorOfMovement;
         public WarShipUnityObject ship;
         public WarShipMovementController warShipMovementController;
-        public TestWarShipMovementBehavior testWarShipMovementBehaviorbehavior;
+        public NormalWsMovementBehavior testWarShipMovementBehaviorbehavior;
         //public Assets.Scripts.Mechanic.WarShip.WarShip warShip;
 
         // Use this for initialization

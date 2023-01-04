@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Assets.Scripts.Mechanic.Test
 {
     [Serializable]
-    public class TestWarShipMovementBehavior : WarShipMovementBehavior
+    public class NormalWsMovementBehavior : WarShipMovementBehavior
     {
         public float minDistanceForPerpendicularMovement;
         public float minAngleForMaxWheelSteering;

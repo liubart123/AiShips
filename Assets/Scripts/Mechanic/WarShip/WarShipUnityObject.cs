@@ -1,4 +1,6 @@
+using Assets.Scripts.Mechanic.Test;
 using Assets.Scripts.Mechanic.WarShip;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +8,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class WarShipUnityObject : MonoBehaviour
 {
-    [HideInInspector]
     public WarShip warShip;
     // Start is called before the first frame update
     void Start()
     {
-        if (warShip != null)
-        {
-            warShip.InitializeWarShipComponents();
-        }
+        Initialize();
     }
 
     private void Update()
@@ -34,4 +32,15 @@ public class WarShipUnityObject : MonoBehaviour
         }
     }
 
+    public virtual void Initialize()
+    {
+        if (warShip != null)
+        {
+            warShip.InitializeWarShipComponents();
+        }
+        warShip.warShipMovementBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipMovementBehavior();
+        warShip.warShipShootingController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipShootingController();
+        warShip.warShipWeaponBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipWeaponBehavior();
+        warShip.warShipMovementController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipMovementController();
+    }
 }

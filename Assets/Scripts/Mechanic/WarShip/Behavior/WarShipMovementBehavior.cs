@@ -11,7 +11,6 @@ namespace Assets.Scripts.Mechanic.WarShip.Behavior
     [Serializable]
     public class WarShipMovementBehavior : WarShipComponent
     {
-        [NonSerialized]
         public VectorOfMovement vectorOfMovement;
 
         public WarShipMovementBehavior()
