@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Mechanic.Main;
+using log4net;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace Assets.Scripts.Mechanic.Test
             if (gameEngine == null)
                 gameEngine = new GameEngine();
             InitializeEngine();
+
         }
         void InitializeEngine()
         {
@@ -51,6 +53,7 @@ namespace Assets.Scripts.Mechanic.Test
             }
             //Instance.InitializeEngine();
             Debug.Log("Tick");
+
             Instance.gameEngine.DoTick();
         }
 

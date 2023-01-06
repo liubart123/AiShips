@@ -1,16 +1,17 @@
 ﻿using Assets.Scripts.Mechanic.Main;
+using log4net;
+using log4net.Repository.Hierarchy;
 using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.Test
 {
-    public class TestNormalWarShipMovementBehavior : MonoBehaviour 
-    { 
+    public class TestNormalWarShipMovementBehavior : MonoBehaviour
+    {
         public NormalWsMovementBehavior shipMovementBehavior;
 
         private void Start()
         {
-            CustomLogger.Log("ad");
             Initialize();
         }
         public void Initialize()
@@ -21,6 +22,9 @@ namespace Assets.Scripts.Mechanic.Test
                 return;
             warShip.warShipMovementBehavior = shipMovementBehavior;
             warShip.InitializeWarShipComponents();
+        }
+        public void Update()
+        {
         }
     }
 }

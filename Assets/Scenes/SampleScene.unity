@@ -238,7 +238,7 @@ Transform:
   m_Children:
   - {fileID: 1289878248}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &82149765
 MonoBehaviour:
@@ -557,84 +557,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1066324759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1066324760}
-  - component: {fileID: 1066324761}
-  m_Layer: 0
-  m_Name: VectorOfMovement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1066324760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066324759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.43, y: 4.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1066324761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066324759}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b83574b0e9f854c9e1d9a322d606bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vectorOfMovement:
-    startPosition: {x: 0, y: 0}
-    direction: {x: 3, y: 2}
-  ship: {fileID: 2128681758}
-  warShipMovementController:
-    currentVelocity: 20
-    targetVelocity: 20
-    currentRotationAngle: 33.038258
-    currentSteeringWheelState: -0.003704201
-    targetSteeringWheelState: -0.003704201
-    currentPosition: {x: 31.405111, y: 21.040442}
-    velocityChangePerTick: 0.1
-    steerWheelChangePerTick: 0.1
-    rateOfTurn: 1
-    velocityMultiplier: 0.01
-    turningRateMulitplier: 5
-  testWarShipMovementBehaviorbehavior:
-    vectorOfMovement:
-      startPosition: {x: 0, y: 0}
-      direction: {x: 0, y: 0}
-    minDistanceForPerpendicularMovement: 10
-    minAngleForMaxWheelSteering: 45
-    targetVelocity: 20
-    shipPosition: {x: 31.237415, y: 20.931456}
-    shipDirection: {x: 0.8384829, y: 0.5449279}
-    pointC: {x: 31.28658, y: 20.857718}
-    vectorBC: {x: 0.04916382, y: -0.0737381}
-    targetDirectionOfMovement: {x: 0.8296352, y: 0.54262316}
-    angleCAB: 0.13270402
-    distanceAB: 37.601887
-    distanceCB: 0.087090485
-    angleDBC: 90.67307
-    targetRotationAngle: 0.16668904
-    targetWheelingSteering: -0.003704201
 --- !u!1 &1289878247
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +641,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1396688521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396688523}
+  - component: {fileID: 1396688522}
+  m_Layer: 0
+  m_Name: Logger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1396688522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396688521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41f2dac7edd1d747a76ffe9fe7b6b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1396688523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396688521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.870397, y: 5.86302, z: -0.10975388}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1554772363
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,10 +806,10 @@ MonoBehaviour:
       warShipMovementController:
         currentVelocity: 20
         targetVelocity: 20
-        currentRotationAngle: 33.14938
+        currentRotationAngle: 34.29764
         currentSteeringWheelState: -0.003704201
         targetSteeringWheelState: -0.003704201
-        currentPosition: {x: 32.41055, y: 21.695492}
+        currentPosition: {x: 42.7249, y: 28.578005}
         velocityChangePerTick: 0.1
         steerWheelChangePerTick: 0.1
         rateOfTurn: 1
