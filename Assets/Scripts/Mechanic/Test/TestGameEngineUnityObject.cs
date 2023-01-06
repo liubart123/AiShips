@@ -36,6 +36,7 @@ namespace Assets.Scripts.Mechanic.Test
         }
         void InitializeEngine()
         {
+            Debug.Log("Initialize test engine");
             gameEngine.warShips = warShipUnityObjects.Select(shipUo => shipUo.warShip).ToList();
         }
 
@@ -45,9 +46,11 @@ namespace Assets.Scripts.Mechanic.Test
             if (Instance.ticksAreRunning)
             {
                 Instance.ticksAreRunning = false;
+                Debug.Log("Stop tick running");
                 return;
             }
             //Instance.InitializeEngine();
+            Debug.Log("Tick");
             Instance.gameEngine.DoTick();
         }
 
@@ -58,8 +61,10 @@ namespace Assets.Scripts.Mechanic.Test
             if (Instance.ticksAreRunning)
             {
                 Instance.ticksAreRunning = false;
+                Debug.Log("Stop tick running");
                 return;
             }
+            Debug.Log("Start tick running");
             Instance.ticksAreRunning = true;
             await DoTickCoroutine();
         }

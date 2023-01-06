@@ -10,9 +10,7 @@ namespace Assets.Scripts.Mechanic.Test
     {
         public float minDistanceForPerpendicularMovement;
         public float minAngleForMaxWheelSteering;
-        public int ticksInPeriod = 50;
         public float targetVelocity = 10;
-        public int tickNumber = 0;
         [Header("Local fields for calculation")]
         public Vector2 shipPosition;
         public Vector2 shipDirection, pointC, vectorBC, targetDirectionOfMovement;
@@ -21,14 +19,6 @@ namespace Assets.Scripts.Mechanic.Test
         public float targetWheelingSteering;
         public override void DoMovementBehaviorTick()
         {
-            //Debug.Log($"TestMovementBehavior Tick{tickNumber}");
-            //if (tickNumber % ticksInPeriod == 0)
-            //{
-            //    bool isEven = (tickNumber % (ticksInPeriod * 2) / ticksInPeriod) == 0;
-            //    WarShip.warShipMovementController.targetVelocity = targetVelocity + targetVelocity / 2 * (isEven ? 1 : 0);
-            //    WarShip.warShipMovementController.targetSteeringWheelState = isEven ? 1 : 0;
-            //} 
-
             shipPosition = WarShip.warShipMovementController.currentPosition;
             shipDirection = new Vector2(
                 Mathf.Cos(WarShip.warShipMovementController.currentRotationAngle * Mathf.PI / 180),
@@ -69,7 +59,7 @@ namespace Assets.Scripts.Mechanic.Test
 
             if (distanceCB > minDistanceForPerpendicularMovement)
             {
-                targetDirectionOfMovement = vectorBC.normalized;
+                targetDirectionOfMovement = vectorOfMovement.startPosition - shipPosition;
             } else
             {
                 targetDirectionOfMovement = Vector2.Lerp(
@@ -89,7 +79,6 @@ namespace Assets.Scripts.Mechanic.Test
             WarShip.warShipMovementController.targetSteeringWheelState = targetWheelingSteering;
             WarShip.warShipMovementController.targetVelocity = targetVelocity;
 
-            tickNumber++;
         }
     }
 }

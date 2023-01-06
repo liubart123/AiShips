@@ -1,10 +1,12 @@
 ﻿using Assets.Scripts.Mechanic.WarShip.Behavior;
 using Assets.Scripts.Mechanic.WarShip.Controllers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.WarShip
 {
@@ -18,8 +20,11 @@ namespace Assets.Scripts.Mechanic.WarShip
         public WarShipWeaponBehavior warShipWeaponBehavior;
         #endregion
 
+        ILog log = LogManager.GetLogger("asd");
+
         public void InitializeWarShipComponents()
         {
+            Debug.Log("Initialize warship");
             List<WarShipComponent> components = new List<WarShipComponent>
             {
                 warShipShootingController,

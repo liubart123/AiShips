@@ -34,13 +34,14 @@ public class WarShipUnityObject : MonoBehaviour
 
     public virtual void Initialize()
     {
-        if (warShip != null)
-        {
-            warShip.InitializeWarShipComponents();
-        }
-        warShip.warShipMovementBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipMovementBehavior();
-        warShip.warShipShootingController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipShootingController();
-        warShip.warShipWeaponBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipWeaponBehavior();
-        warShip.warShipMovementController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipMovementController();
+        if (warShip.warShipMovementBehavior == null)
+            warShip.warShipMovementBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipMovementBehavior();
+        if (warShip.warShipShootingController == null)
+            warShip.warShipShootingController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipShootingController();
+        if (warShip.warShipWeaponBehavior == null)
+            warShip.warShipWeaponBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipWeaponBehavior();
+        if (warShip.warShipMovementController == null)
+            warShip.warShipMovementController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipMovementController();
+        warShip.InitializeWarShipComponents();
     }
 }
