@@ -5,9 +5,13 @@ using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
 using log4net.Layout;
+using log4net.Layout.Pattern;
 using log4net.Repository.Hierarchy;
+using log4net.Util;
+using Newtonsoft.Json;
 using System.Collections;
 using System.IO;
+using System.Numerics;
 using UnityEditor;
 using UnityEngine;
 using static log4net.Appender.FileAppender;
@@ -20,12 +24,12 @@ namespace Assets.Scripts.Mechanic.Main
         //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void ConfigureAllLogging()
         {
-            var patternLayout = new PatternLayout
+            var patternLayout = new CustomPatternLayout
             {
-                ConversionPattern = "%date %-5level %logger - %message<br/>%newline"
+                ConversionPattern = "%date -%ColorLevel %logger - %message<br/>%newline"
             };
-            patternLayout.ActivateOptions();
 
+            patternLayout.ActivateOptions();
             var infoFileAppender = new CustomFileAppender
             {
                 AppendToFile = true,
@@ -125,6 +129,45 @@ namespace Assets.Scripts.Mechanic.Main
                 base.Append(customizedLoggingEvent);
             }
 
+        }
+        private class ColoredMessageConverter : PatternLayoutConverter
+        {
+            protected override void Convert(TextWriter writer, LoggingEvent loggingEvent)
+            {
+                string color = "";
+                switch (loggingEvent.Level.Name)
+                {
+                    case "DEBUG":
+                        color = "#c8c6bd";
+                        break;
+                    case "WARN":
+                        color = "#e9c84f";
+                        break;
+                    case "INFO":
+                        color = "#ded7bc";
+                        break;
+                    case "NOTICE":
+                        color = "#efde9e";
+                        break;
+                    case "ERROR":
+                        color = "#ff0000";
+                        break;
+                    case "FATAL":
+                        color = "#8f0000";
+                        break;
+                }
+                string logToRender = string.Format(" <font color=\"{0}\">{1}</font>", color, loggingEvent.Level.Name);
+                //Add logToRender to file
+
+                writer.Write(logToRender);
+            }
+        }
+        public class CustomPatternLayout : PatternLayout
+        {
+            public CustomPatternLayout()
+            {
+                AddConverter(new ConverterInfo { Name = "ColorLevel", Type = typeof(ColoredMessageConverter) });
+            }
         }
 
         private static int GetUnityFontSizeForLoggingLevel(Level level)
