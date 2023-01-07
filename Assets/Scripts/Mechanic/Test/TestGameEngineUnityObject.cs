@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Mechanic.Main;
 using log4net;
+using log4net.Repository.Hierarchy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Assets.Scripts.Mechanic.Test
         public GameEngine gameEngine;
         public List<WarShipUnityObject> warShipUnityObjects;
         public int msecondsForTick;
+        static ILog logger = LogManager.GetLogger(typeof(TestGameEngineUnityObject));
 
         static TestGameEngineUnityObject _instance;
         static TestGameEngineUnityObject Instance
@@ -53,6 +55,7 @@ namespace Assets.Scripts.Mechanic.Test
             }
             //Instance.InitializeEngine();
             Debug.Log("Tick");
+            logger.Debug("Logger <b>tick</b>");
 
             Instance.gameEngine.DoTick();
         }

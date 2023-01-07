@@ -22,37 +22,46 @@ namespace Assets.Scripts.Mechanic.Main
         {
             var patternLayout = new PatternLayout
             {
-                ConversionPattern = "%date %-5level %logger - %message%newline"
+                ConversionPattern = "%date %-5level %logger - %message<br/>%newline"
             };
             patternLayout.ActivateOptions();
 
             var infoFileAppender = new RollingFileAppender
             {
                 AppendToFile = false,
-                File = $"{Application.dataPath}/Logs/InfoLog.log",
+                File = $"{Application.dataPath}/Logs/InfoLog.md",
                 Layout = patternLayout,
                 MaxSizeRollBackups = 5,
                 MaximumFileSize = "10MB",
                 RollingStyle = RollingFileAppender.RollingMode.Size,
                 StaticLogFileName = true,
-                Threshold = log4net.Core.Level.Info
+                PreserveLogFileNameExtension = true,
+                Threshold = log4net.Core.Level.Info,
             };
             infoFileAppender.ActivateOptions();
+
             var allFileAppender = new RollingFileAppender
             {
                 AppendToFile = false,
-                File = $"{Application.dataPath}/Logs/AllLog.log",
+                File = $"{Application.dataPath}/Logs/AllLog.md",
                 Layout = patternLayout,
                 MaxSizeRollBackups = 5,
                 MaximumFileSize = "10MB",
                 LockingModel = new MinimalLock(),
                 RollingStyle = RollingFileAppender.RollingMode.Size,
                 StaticLogFileName = true,
-                Threshold = log4net.Core.Level.All
+                Threshold = log4net.Core.Level.All,
+                PreserveLogFileNameExtension = true,
             };
             allFileAppender.ActivateOptions();
 
-            BasicConfigurator.Configure(infoFileAppender, allFileAppender);
+            var unityLogger = new UnityAppender
+            {
+                Layout = new PatternLayout()
+            };
+            unityLogger.ActivateOptions();
+
+            BasicConfigurator.Configure(infoFileAppender, allFileAppender, unityLogger);
         }
         public void Start()
         {
@@ -65,5 +74,32 @@ namespace Assets.Scripts.Mechanic.Main
             yield return null;
             ConfigureAllLogging();
         }
+
+        /// <summary> An appender which logs to the unity console. </summary>
+        private class UnityAppender : AppenderSkeleton
+        {
+            /// <inheritdoc />
+            protected override void Append(LoggingEvent loggingEvent)
+            {
+                string message = RenderLoggingEvent(loggingEvent);
+
+                if (Level.Compare(loggingEvent.Level, Level.Error) >= 0)
+                {
+                    // everything above or equal to error is an error
+                    Debug.LogErrorFormat(message);
+                }
+                else if (Level.Compare(loggingEvent.Level, Level.Warn) >= 0)
+                {
+                    // everything that is a warning up to error is logged as warning
+                    Debug.LogWarningFormat(message);
+                }
+                else
+                {
+                    // everything else we'll just log normally
+                    Debug.LogFormat(message);
+                }
+            }
+        }
     }
+
 }
