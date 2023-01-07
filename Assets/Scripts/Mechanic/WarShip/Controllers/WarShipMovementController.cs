@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.WarShip.Controllers
 {
+    /// <summary>
+    /// Calculates ship's new position in new tick, according to movement parameters.
+    /// </summary>
     [Serializable]
     public class WarShipMovementController : WarShipComponent
     {
@@ -38,7 +41,6 @@ namespace Assets.Scripts.Mechanic.WarShip.Controllers
 
         public virtual void DoTick()
         {
-            //Debug.Log($"MovementController Tick");
             Vector2 direction = new Vector2(
                 Mathf.Cos(Mathf.PI * currentRotationAngle / 180),
                 Mathf.Sin(Mathf.PI * currentRotationAngle / 180));

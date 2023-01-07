@@ -8,6 +8,7 @@ namespace Assets.Scripts.Mechanic.Test
 {
     public class TestNormalWarShipMovementBehavior : MonoBehaviour
     {
+        CustomLogger logger = new CustomLogger("TestNormalWarShipMovementBehavior", new Color(215, 232, 130));
         public NormalWsMovementBehavior shipMovementBehavior;
 
         private void Start()
@@ -16,12 +17,12 @@ namespace Assets.Scripts.Mechanic.Test
         }
         public void Initialize()
         {
-            Debug.Log("Initialize test normal ws movement");
+            logger.Info("Initialize");
             var warShip = GetComponent<WarShipUnityObject>().warShip;
             if (warShip == null)
                 return;
             warShip.warShipMovementBehavior = shipMovementBehavior;
-            warShip.InitializeWarShipComponents();
+            warShip.SetUpWarShipComponents();
         }
         public void Update()
         {

@@ -20,11 +20,12 @@ namespace Assets.Scripts.Mechanic.WarShip
         public WarShipWeaponBehavior warShipWeaponBehavior;
         #endregion
 
-        ILog log = LogManager.GetLogger("asd");
 
-        public void InitializeWarShipComponents()
+        /// <summary>
+        /// Connects ship components with this ship
+        /// </summary>
+        public void SetUpWarShipComponents()
         {
-            Debug.Log("Initialize warship");
             List<WarShipComponent> components = new List<WarShipComponent>
             {
                 warShipShootingController,

@@ -1,105 +1,66 @@
-﻿
-using Assets.Scripts.Mechanic.Test;
-using log4net;
-using log4net.Appender;
-using log4net.Config;
-using log4net.Core;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
-using System.Collections;
-using System.IO;
-using UnityEditor;
+﻿using log4net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
-using static log4net.Appender.FileAppender;
 
 namespace Assets.Scripts.Mechanic.Main
 {
-    public class CustomLogger : MonoBehaviour
+    public class CustomLogger
     {
-        public static ILog Logger { get; set; }
-        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static void ConfigureAllLogging()
+        public Color messageColor;
+        public ILog logger;
+        public CustomLogger()
         {
-            var patternLayout = new PatternLayout
-            {
-                ConversionPattern = "%date %-5level %logger - %message<br/>%newline"
-            };
-            patternLayout.ActivateOptions();
-
-            var infoFileAppender = new RollingFileAppender
-            {
-                AppendToFile = false,
-                File = $"{Application.dataPath}/Logs/InfoLog.md",
-                Layout = patternLayout,
-                MaxSizeRollBackups = 5,
-                MaximumFileSize = "10MB",
-                RollingStyle = RollingFileAppender.RollingMode.Size,
-                StaticLogFileName = true,
-                PreserveLogFileNameExtension = true,
-                Threshold = log4net.Core.Level.Info,
-            };
-            infoFileAppender.ActivateOptions();
-
-            var allFileAppender = new RollingFileAppender
-            {
-                AppendToFile = false,
-                File = $"{Application.dataPath}/Logs/AllLog.md",
-                Layout = patternLayout,
-                MaxSizeRollBackups = 5,
-                MaximumFileSize = "10MB",
-                LockingModel = new MinimalLock(),
-                RollingStyle = RollingFileAppender.RollingMode.Size,
-                StaticLogFileName = true,
-                Threshold = log4net.Core.Level.All,
-                PreserveLogFileNameExtension = true,
-            };
-            allFileAppender.ActivateOptions();
-
-            var unityLogger = new UnityAppender
-            {
-                Layout = new PatternLayout()
-            };
-            unityLogger.ActivateOptions();
-
-            BasicConfigurator.Configure(infoFileAppender, allFileAppender, unityLogger);
+            logger = LogManager.GetLogger("default");
+            this.messageColor = Color.gray;
         }
-        public void Start()
+        public CustomLogger(string loggerName)
         {
-            StartCoroutine(ConfigureLogs());    //configuring logs on Start doesn't work :{
+            logger = LogManager.GetLogger(loggerName);
+            this.messageColor = Color.gray;
         }
-
-
-        IEnumerator ConfigureLogs()
+        public CustomLogger(string loggerName, Color messageColor)
         {
-            yield return null;
-            ConfigureAllLogging();
+            logger = LogManager.GetLogger(loggerName);
+            this.messageColor = messageColor;
         }
-
-        /// <summary> An appender which logs to the unity console. </summary>
-        private class UnityAppender : AppenderSkeleton
+        public void Debug(string message, bool useColor = true)
         {
-            /// <inheritdoc />
-            protected override void Append(LoggingEvent loggingEvent)
-            {
-                string message = RenderLoggingEvent(loggingEvent);
-
-                if (Level.Compare(loggingEvent.Level, Level.Error) >= 0)
-                {
-                    // everything above or equal to error is an error
-                    Debug.LogErrorFormat(message);
-                }
-                else if (Level.Compare(loggingEvent.Level, Level.Warn) >= 0)
-                {
-                    // everything that is a warning up to error is logged as warning
-                    Debug.LogWarningFormat(message);
-                }
-                else
-                {
-                    // everything else we'll just log normally
-                    Debug.LogFormat(message);
-                }
-            }
+            if (useColor)
+                logger.Debug($"<color={ColorUtility.ToHtmlStringRGB(messageColor)}>{message}</color>");
+            else
+                logger.Debug(message);
+        }
+        public void Info(string message, bool useColor = true)
+        {
+            if (useColor)
+                logger.Info($"<color={ColorUtility.ToHtmlStringRGB(messageColor)}>{message}</color>");
+            else
+                logger.Info(message);
+        }
+        public void Notice(string message, bool useColor = true)
+        {
+            if (useColor)
+                logger.Notice($"<color={ColorUtility.ToHtmlStringRGB(messageColor)}>{message}</color>");
+            else
+                logger.Notice(message);
+        }
+        public void Error(string message, bool useColor = true)
+        {
+            if (useColor)
+                logger.Error($"<color={ColorUtility.ToHtmlStringRGB(messageColor)}>{message}</color>");
+            else
+                logger.Error(message);
+        }
+        public void Warn(string message, bool useColor = true)
+        {
+            if (useColor)
+                logger.Warn($"<color={ColorUtility.ToHtmlStringRGB(messageColor)}>{message}</color>");
+            else
+                logger.Warn(message);
         }
     }
-
 }

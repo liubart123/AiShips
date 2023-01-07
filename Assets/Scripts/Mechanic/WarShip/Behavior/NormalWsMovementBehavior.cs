@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.Test
 {
+    /// <summary>
+    /// Sets target velocity and steering wheel turn according to given VectorOfMovement
+    /// </summary>
     [Serializable]
     public class NormalWsMovementBehavior : WarShipMovementBehavior
     {

@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.WarShip.Behavior
 {
+    /// <summary>
+    /// Sets target velocity and steering wheel turn according to current state or given orders
+    /// </summary>
     [Serializable]
     public class WarShipMovementBehavior : WarShipComponent
     {

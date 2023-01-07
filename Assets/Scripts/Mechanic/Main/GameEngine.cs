@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Mechanic.Main
 {
+    /// <summary>
+    /// Stores all main game info. Runs calculations for each tick
+    /// </summary>
     [Serializable]
     public class GameEngine
     {
@@ -20,11 +23,6 @@ namespace Assets.Scripts.Mechanic.Main
                 ship.warShipMovementController.DoTick();
             }
 
-            //foreach (var ship in warShips)
-            //{
-            //    ship.warShipWeaponBehavior.DoWeaponBehaviorTick();
-            //}
-            //Debug.Log("Tick finished");
         }
     }
 }

@@ -14,11 +14,11 @@ namespace Assets.Scripts.Mechanic.Test
 {
     public class TestGameEngineUnityObject : MonoBehaviour
     {
+        static CustomLogger logger = new CustomLogger("Game Engine UO", new Color(223, 208, 186));
         [HideInInspector]
         public GameEngine gameEngine;
         public List<WarShipUnityObject> warShipUnityObjects;
         public int msecondsForTick;
-        static ILog logger = LogManager.GetLogger(typeof(TestGameEngineUnityObject));
 
         static TestGameEngineUnityObject _instance;
         static TestGameEngineUnityObject Instance
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Mechanic.Test
         }
         void InitializeEngine()
         {
-            Debug.Log("Initialize test engine");
+            logger.Notice("Initialize test engine");
             gameEngine.warShips = warShipUnityObjects.Select(shipUo => shipUo.warShip).ToList();
         }
 
@@ -50,12 +50,11 @@ namespace Assets.Scripts.Mechanic.Test
             if (Instance.ticksAreRunning)
             {
                 Instance.ticksAreRunning = false;
-                Debug.Log("Stop tick running");
+                logger.Info("Stop tick running");
                 return;
             }
             //Instance.InitializeEngine();
-            Debug.Log("Tick");
-            logger.Debug("Logger <b>tick</b>");
+            logger.Info("tick");
 
             Instance.gameEngine.DoTick();
         }
@@ -67,10 +66,10 @@ namespace Assets.Scripts.Mechanic.Test
             if (Instance.ticksAreRunning)
             {
                 Instance.ticksAreRunning = false;
-                Debug.Log("Stop tick running");
+                logger.Info("Stop tick running");
                 return;
             }
-            Debug.Log("Start tick running");
+            logger.Info("Start tick running");
             Instance.ticksAreRunning = true;
             await DoTickCoroutine();
         }

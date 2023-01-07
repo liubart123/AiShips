@@ -12,7 +12,7 @@ public class WarShipUnityObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Initialize();
+        InitializeEmptyWarShipComponents();
     }
 
     private void Update()
@@ -32,7 +32,7 @@ public class WarShipUnityObject : MonoBehaviour
         }
     }
 
-    public virtual void Initialize()
+    public virtual void InitializeEmptyWarShipComponents()
     {
         if (warShip.warShipMovementBehavior == null)
             warShip.warShipMovementBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipMovementBehavior();
@@ -42,6 +42,6 @@ public class WarShipUnityObject : MonoBehaviour
             warShip.warShipWeaponBehavior = new Assets.Scripts.Mechanic.WarShip.Behavior.WarShipWeaponBehavior();
         if (warShip.warShipMovementController == null)
             warShip.warShipMovementController = new Assets.Scripts.Mechanic.WarShip.Controllers.WarShipMovementController();
-        warShip.InitializeWarShipComponents();
+        warShip.SetUpWarShipComponents();
     }
 }
